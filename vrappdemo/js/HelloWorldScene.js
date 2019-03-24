@@ -2,41 +2,46 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
-
-import {
-  ViroScene,
-  ViroText,
-  Viro360Image,
-} from 'react-viro';
+import { ViroScene, ViroText, Viro360Image, ViroMaterials } from 'react-viro';
 
 export default class HelloWorldScene extends Component {
+	constructor() {
+		super();
 
-  constructor() {
-    super();
+		this.state = {}; // Set initial state here
+	}
 
-    this.state = {} // Set initial state here
-  }
-
-  render() {
-    return (
-      <ViroScene>
-        <Viro360Image source={require('./res/guadalupe_360.jpg')} />
-        <ViroText text="Hello World!" width={2} height={2} position={[0, 0, -2]} style={styles.helloWorldTextStyle} />
-      </ViroScene>
-    );
-  }
-
+	render() {
+		return (
+			<ViroScene>
+				<Viro360Image source={require('./res/360_space.jpg')} />
+				<ViroText
+					fontSize={40}
+					text="Hi, from Crowdbotics"
+					width={2}
+					height={2}
+					position={[0, 0, -2]}
+					textAlign="center"
+					textAlignVertical="center"
+					color="#ffffff"
+					extrusionDepth={8}
+					materials={['frontMaterial', 'backMaterial', 'sideMaterial']}
+				/>
+			</ViroScene>
+		);
+	}
 }
 
-var styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 60,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',  
-  },
+ViroMaterials.createMaterials({
+	frontMaterial: {
+		diffuseColor: '#FFFFFF'
+	},
+	backMaterial: {
+		diffuseColor: '#FF0000'
+	},
+	sideMaterial: {
+		diffuseColor: '#0000FF'
+	}
 });
 
 module.exports = HelloWorldScene;
